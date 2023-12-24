@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gara.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25"
+            VerticalOptions="Center">
+
+            <StackLayout
+                x:Name="LoginView">
+                <Button
+                    x:Name="LoginBtn"
+                    Text="Log In"
+                    SemanticProperties.Hint="Click to Login"
+                    Clicked="OnLoginClicked"
+                    HorizontalOptions="Center"/>
+
+                <WebView x:Name="WebViewInstance"/>
+
+            </StackLayout>
+
+            <StackLayout
+                x:Name="HomeView"
+                IsVisible="false">
+
+                <Image
+                  Source="dotnet_bot.png"
+                  SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                  HeightRequest="200"
+                  HorizontalOptions="Center" />
+                
+            </StackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -9,7 +9,7 @@ namespace Gara.Services
     public interface INavigationService
     {
         Task InitializeAsync();
-        Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null);
+        Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null!);
         Task PopAsync();
     }
     public class GaraNavigationService : INavigationService
@@ -19,7 +19,7 @@ namespace Gara.Services
             return Task.CompletedTask;
         }
 
-        public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null)
+        public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null!)
         {
             return
                 routeParameters != null

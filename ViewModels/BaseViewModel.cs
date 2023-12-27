@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Gara.Auth0;
 using Gara.Services;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace Gara.ViewModels
     {
         protected INavigationService navigationService;
         protected IRestService restService;
-        protected BaseViewModel(INavigationService navigationService, IRestService restService)
+        protected Auth0Client client;
+        protected BaseViewModel(INavigationService navigationService, IRestService restService, Auth0Client client)
         {
             this.navigationService = navigationService;
             this.restService = restService;
+            this.client = client;
         }
     }
 }

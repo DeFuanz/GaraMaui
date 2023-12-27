@@ -5,7 +5,15 @@
              xmlns:viewmodel="clr-namespace:Gara.ViewModels"
              x:DataType="viewmodel:HomeViewModel"
              Title="Home">
-    <VerticalStackLayout>
+    
+    
+    <VerticalStackLayout
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <Label 
+            Text="{Binding Auth0UserName}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         <Label 
             Text="Press button to test Api Connection"
             VerticalOptions="Center" 

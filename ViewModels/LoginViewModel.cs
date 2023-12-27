@@ -3,22 +3,24 @@ using CommunityToolkit.Mvvm.Input;
 using Gara.Auth0;
 using Gara.Services;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Gara.ViewModels
 {
-    public class LoginViewModel : ObservableObject
+    public class LoginViewModel : BaseViewModel
     {
-        private readonly Auth0Client client;
-        private readonly INavigationService navigationService;
 
         public IRelayCommand LoginCommand { get; }
+        private readonly IUserService userService;
 
-        public LoginViewModel(Auth0Client auth0Client, INavigationService navigationService)
+        public LoginViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client)
         {
-            this.client = auth0Client;
+            this.client = client;
             this.navigationService = navigationService;
+            this.restService = restService;
             LoginCommand = new RelayCommand(async () => await LoginAsync());
+            this.userService = userService;
         }
 
         private async Task LoginAsync()
@@ -27,8 +29,12 @@ namespace Gara.ViewModels
             {
                 var loginResult = await client.LoginAsync();
 
-                if (!loginResult.IsError)
+                
+
+                if (!loginResult.IsError && loginResult.User != null)
                 {
+                    userService.Auth0UserName = loginResult.User.Identity.Name;
+
                     await navigationService.NavigateToAsync("//HomePage");
                 }
 

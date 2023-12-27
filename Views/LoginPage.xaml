@@ -13,6 +13,11 @@
 
             <StackLayout
                 x:Name="LoginView">
+                <Image
+                    x:Name="LoginImage"
+                    Source="gara_logo.jpg"
+                    HeightRequest="300"
+                    WidthRequest="300"/>
                 <Button
                     x:Name="LoginBtn"
                     Text="Log In"

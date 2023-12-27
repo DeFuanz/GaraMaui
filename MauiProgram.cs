@@ -42,6 +42,8 @@ namespace Gara
 
             builder.Services.AddSingleton<IRestService, GaraRestService>();
 
+            builder.Services.AddSingleton<IUserService, UserService>();
+
             builder.Services.AddTransient<LoginViewModel>();
 
             builder.Services.AddTransient<LoginPage>();

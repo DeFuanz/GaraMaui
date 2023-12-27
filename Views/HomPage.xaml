@@ -7,7 +7,12 @@
              Title="Home">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Press button to test Api Connection"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button 
+            Command="{Binding TestApiCommand}"
+            Text="Test Api Connection" 
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>

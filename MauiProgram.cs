@@ -37,7 +37,10 @@ namespace Gara
 #endif
             }));
 
+
             builder.Services.AddSingleton<INavigationService , GaraNavigationService>();
+
+            builder.Services.AddSingleton<IRestService, GaraRestService>();
 
             builder.Services.AddTransient<LoginViewModel>();
 

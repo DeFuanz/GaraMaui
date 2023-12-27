@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Gara.ViewModels
 {
-    public class BaseViewModel(INavigationService navigationService) : ObservableObject
+    public abstract class BaseViewModel : ObservableObject
     {
-        public INavigationService NavigationService = navigationService;
+        protected INavigationService navigationService;
+        protected IRestService restService;
+        protected BaseViewModel(INavigationService navigationService, IRestService restService)
+        {
+            this.navigationService = navigationService;
+            this.restService = restService;
+        }
     }
 }

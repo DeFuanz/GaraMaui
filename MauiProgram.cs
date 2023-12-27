@@ -1,4 +1,6 @@
 ﻿using Gara.Auth0;
+using Gara.Services;
+using Gara.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace Gara
@@ -7,6 +9,7 @@ namespace Gara
     {
         public static MauiApp CreateMauiApp()
         {
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -19,8 +22,7 @@ namespace Gara
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<MainPage>();
-
+                                   
             builder.Services.AddSingleton(new Auth0Client(new()
             {
                 Domain = "dev-zhjessp8n653h4m3.us.auth0.com",
@@ -29,10 +31,21 @@ namespace Gara
 
 #if WINDOWS
                 RedirectUri = "https://localhost/callback"
+
 #else
                 RedirectUri = "myapp://callback"
 #endif
             }));
+
+            builder.Services.AddSingleton<INavigationService , GaraNavigationService>();
+
+            builder.Services.AddTransient<LoginViewModel>();
+
+            builder.Services.AddTransient<LoginPage>();
+
+            builder.Services.AddTransient<HomeViewModel>();
+
+            builder.Services.AddTransient<HomePage>();
 
             return builder.Build();
         }

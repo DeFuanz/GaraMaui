@@ -3,14 +3,9 @@
 
 namespace Gara.Auth0
 {
-    public class WebViewBrowserAuthenticator : IdentityModel.OidcClient.Browser.IBrowser
+    public class WebViewBrowserAuthenticator(WebView webView) : IdentityModel.OidcClient.Browser.IBrowser
     {
-        private readonly WebView webView;
-
-        public WebViewBrowserAuthenticator(WebView webView)
-        {
-            this.webView = webView;
-        }
+        private readonly WebView webView = webView;
 
         public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken =  default)
         {

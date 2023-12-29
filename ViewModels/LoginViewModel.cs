@@ -24,6 +24,7 @@ namespace Gara.ViewModels
             this.userService = userService;
         }
 
+        //Login user. if success, navigate to home page and save user info
         private async Task LoginAsync()
         {
             try

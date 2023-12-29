@@ -39,9 +39,9 @@ namespace Gara
             }));
 
 
-            builder.Services.AddSingleton<INavigationService , GaraNavigationService>();
+            builder.Services.AddSingleton<INavigationService , NavigationService>();
 
-            builder.Services.AddSingleton<IRestService, GaraRestService>();
+            builder.Services.AddSingleton<IRestService, RestService>();
 
             builder.Services.AddSingleton<IUserService, UserService>();
 

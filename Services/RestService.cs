@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Gara.Services
 {
-    public class GaraRestService : IRestService
+    public class RestService : IRestService
     {
         private readonly HttpClient client;
         private readonly JsonSerializerOptions jsonSerializationOptions;
@@ -26,7 +26,7 @@ namespace Gara.Services
             PropertyNameCaseInsensitive = true
         };
 
-        public GaraRestService()
+        public RestService()
         {
             if (Debugger.IsAttached)
             {
@@ -53,6 +53,7 @@ namespace Gara.Services
             return await response.Content.ReadAsStringAsync();
         }
 
+        //Get all vehicles for all users (useful in needing to create a new vehicle)
         public async Task<List<Vehicle>> GetVehicles()
         {
             Uri allVehicleUri = new Uri(uri, $"api/Vehicle");
@@ -73,6 +74,7 @@ namespace Gara.Services
             }
         }
 
+        //Get vehicles that belong to a specific user
         public async Task<List<Vehicle>> GetUserVehicles(string userid)
         {
             Uri userVehicleUri = new Uri(uri, $"api/Vehicle/{userid}");

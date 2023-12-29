@@ -45,12 +45,14 @@ namespace Gara.ViewModels
 
         }
 
+        //Test Api connection
         private async Task<string> TestApiAsync()
         {
             var result = await restService.TestApiConnection();
             return result;
         }
 
+        //Load all vehicles (probably refactor to create page once built)
         private async Task LoadVehiclesAsync()
         {
             Vehicles.Clear();
@@ -61,6 +63,7 @@ namespace Gara.ViewModels
             }
         }
 
+        //Get user vehicles
         private async Task<List<Vehicle>> GetUserVehiclesAsync()
         {
             var vehicles = await restService.GetUserVehicles(userService.Auth0UserId);

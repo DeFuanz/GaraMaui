@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gara.Views.CreateVehiclePage"
+             xmlns:viewmodel="clr-namespace:Gara.ViewModels"
+             x:DataType="viewmodel:CreateVehiclePage"
+             xmlns:model="clr-namespace:Gara.Models"
+             Title="Create Vehicle">
+    <VerticalStackLayout>
+        <Label 
+            Text="Create a new vehicle"
+            HorizontalOptions="Center" />
+        <Picker
+            Title="Select a vehicle">
+            <Picker.Items>
+                
+            </Picker.Items>
+        </Picker>
+    </VerticalStackLayout>
+</ContentPage>

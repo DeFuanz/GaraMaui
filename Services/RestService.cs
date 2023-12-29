@@ -109,5 +109,10 @@ namespace Gara.Services
                 throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
             }
         }
+
+        public async Task AddVehicle(Vehicle vehicle)
+        {
+            
+        }
     }
 }

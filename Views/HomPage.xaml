@@ -14,7 +14,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -63,7 +64,7 @@ VerticalOptions="Center">
             Command="{Binding RefreshCommand}"/>
 
         <CollectionView
-            VerticalOptions="FillAndExpand"
+            VerticalOptions="Fill"
             Grid.ColumnSpan="2"
             Grid.Row="3"
             ItemsSource="{Binding Vehicles}"
@@ -92,6 +93,12 @@ VerticalOptions="Center">
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Button
+            Grid.ColumnSpan="2"
+            Grid.Row="4"
+            Text="Add Vehicle"
+            />
 
     </Grid>
 </ContentPage>

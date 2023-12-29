@@ -1,6 +1,7 @@
 ﻿using Gara.Auth0;
 using Gara.Services;
 using Gara.ViewModels;
+using Gara.Views;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
@@ -53,14 +54,10 @@ namespace Gara
 
             builder.Services.AddTransient<HomePage>();
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
-            {
-                if (e.ExceptionObject is Exception ex)
-                {
-                    // Log the exception or handle it as needed
-                    Debug.WriteLine(ex.Message);
-                }
-            };
+            builder.Services.AddTransient<CreateVehicleViewModel>();
+
+            builder.Services.AddTransient<CreateVehiclePage>();
+
 
             return builder.Build();
         }

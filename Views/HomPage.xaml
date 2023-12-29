@@ -4,24 +4,94 @@
              x:Class="Gara.HomePage"
              xmlns:viewmodel="clr-namespace:Gara.ViewModels"
              x:DataType="viewmodel:HomeViewModel"
-             Title="Home">
-    
-    
-    <VerticalStackLayout
+             xmlns:model="clr-namespace:Gara.Models"
+             Title="Gara">
+
+
+    <Grid
+        HorizontalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.ColumnSpan="2" Grid.Row="0" Text="My Garage" FontSize="Large"  Padding="8"/>
+        <Frame
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="4"> 
+            <StackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Label
+                    Text="Total Gas Cost"
+                    FontSize="Default"/>
+                <Label
+                    Text="0.00" />
+            </StackLayout>
+        </Frame>
+        <Frame
+    Grid.Column="1"
+    Grid.Row="1"
+            Margin="4">
+            <StackLayout
         HorizontalOptions="Center"
-        VerticalOptions="Center">
-        <Label 
-            Text="{Binding Auth0UserName}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="Press button to test Api Connection"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            Command="{Binding TestApiCommand}"
-            Text="Test Api Connection" 
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+VerticalOptions="Center">
+                <Label
+            Text="Total Miles" 
+                    FontSize="Default"/>
+                <Label
+            Text="0" />
+            </StackLayout>
+        </Frame>
+
+        <Label Grid.Column="0" Grid.Row="2" Text="Vehicles" FontSize="Title" Padding="8"/>
+        <Button
+            HeightRequest="10"
+            WidthRequest="85"
+            HorizontalOptions="End"
+            Grid.Column="1"
+            Grid.Row="2"
+            Text="Refresh"
+            FontSize="Micro"
+            Command="{Binding RefreshCommand}"/>
+
+        <CollectionView
+            VerticalOptions="FillAndExpand"
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            ItemsSource="{Binding Vehicles}"
+            EmptyView="No Vehicles">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Vehicle">
+                    <StackLayout>
+                        <Frame
+                            Margin="4">
+                            <HorizontalStackLayout
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                                <Label
+                                    Text="{Binding Make}"
+                                    FontSize="Default"/>
+                                <Label
+                                    Text="{Binding Model}"
+                                    FontSize="Default"/>
+                                <Label
+                                    Text="{Binding Year}"
+                                    FontSize="Default"/>
+                            </HorizontalStackLayout>
+
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 </ContentPage>

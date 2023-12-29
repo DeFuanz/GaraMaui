@@ -2,6 +2,7 @@
 using Gara.Services;
 using Gara.ViewModels;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Gara
 {
@@ -51,6 +52,15 @@ namespace Gara
             builder.Services.AddTransient<HomeViewModel>();
 
             builder.Services.AddTransient<HomePage>();
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                if (e.ExceptionObject is Exception ex)
+                {
+                    // Log the exception or handle it as needed
+                    Debug.WriteLine(ex.Message);
+                }
+            };
 
             return builder.Build();
         }

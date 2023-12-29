@@ -11,5 +11,6 @@ namespace Gara
 
             MainPage = new AppShell();
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gara.Auth0;
+﻿
+using Gara.Auth0;
 using Gara.Models;
 using Gara.Services;
 using System;
@@ -23,7 +24,7 @@ namespace Gara.ViewModels
             set => SetProperty(ref auth0UserName, value);
         }
 
-        public ObservableCollection<Vehicle?> Vehicles { get; } = new();
+        public List<Vehicle> Vehicles { get; } = new();
 
 
         public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -33,12 +34,13 @@ namespace Gara.ViewModels
             this.client = client;
             this.userService = userService;
 
+            Vehicles = Task.Run(GetUserVehiclesAsync).Result;
 
             RefreshCommand = new Command(async () => await LoadVehiclesAsync());
             NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
 
+            
             Auth0UserName = userService.Auth0UserName;
-
 
         }
 

@@ -6,7 +6,7 @@ namespace Gara.Views;
 
 public partial class CreateVehiclePage : ContentPage
 {
-	public CreateVehiclePage(INavigationService navigationService, IRestService restService, Auth0Client client, UserService userService)
+	public CreateVehiclePage(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
 	{
 		InitializeComponent();
         BindingContext = new CreateVehicleViewModel(navigationService, restService, client, userService);

@@ -2,7 +2,7 @@ using Gara.Auth0;
 using Gara.Services;
 using Gara.ViewModels;
 
-namespace Gara;
+namespace Gara.Views;
 
 public partial class HomePage : ContentPage
 {

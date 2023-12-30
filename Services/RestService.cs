@@ -38,6 +38,7 @@ namespace Gara.Services
             }
             uri = new($"http://localhost:{port}");
 
+
             client = new HttpClient();
             jsonSerializationOptions = new JsonSerializerOptions
             {
@@ -110,9 +111,44 @@ namespace Gara.Services
             }
         }
 
-        public async Task AddVehicle(Vehicle vehicle)
+        public async Task AddVehicle(UserVehicle userVehicle)
         {
-            
+            Uri userVehicleUri = new Uri(uri, "api/Vehicle");
+            Debug.WriteLine($"POST request to {userVehicleUri}");
+            var content = JsonContent.Create(userVehicle);
+            HttpResponseMessage response = null;
+
+            try
+            {
+                response = await client.PostAsync(userVehicleUri, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Handle success
+                    Debug.WriteLine("Vehicle added successfully.");
+                }
+                else
+                {
+                    // Read the response content for detailed error information
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Request failed with status code {response.StatusCode} and content: {responseContent}");
+
+                    // Optionally, throw an exception with the detailed error
+                    throw new HttpRequestException($"Request failed with status code {response.StatusCode} and content: {responseContent}");
+                }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Handle exceptions that occur during the request
+                Debug.WriteLine($"HttpRequestException: {httpEx.Message}");
+                throw; // Re-throw the exception if you want to handle it further up the call stack
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                Debug.WriteLine($"An error occurred: {ex.Message}");
+                throw; // Re-throw the exception if you want to handle it further up the call stack
+            }
         }
     }
 }

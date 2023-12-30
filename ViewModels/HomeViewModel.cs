@@ -13,10 +13,9 @@ namespace Gara.ViewModels
 {
     public class HomeViewModel : BaseViewModel 
     {
-        private readonly IUserService userService;
         public Command TestApiCommand { get; }
-
         public Command RefreshCommand { get; }
+        public Command NavigateToAddVehicleCommand { get; }
 
         private string auth0UserName;
         public string Auth0UserName
@@ -28,7 +27,7 @@ namespace Gara.ViewModels
         public ObservableCollection<Vehicle?> Vehicles { get; } = new();
 
 
-        public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client)
+        public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
             this.restService = restService;
             this.navigationService = navigationService;
@@ -39,6 +38,7 @@ namespace Gara.ViewModels
             TestApiCommand = new Command(async () => await TestApiAsync());
 
             RefreshCommand = new Command(async () => await LoadVehiclesAsync());
+            NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
 
             Auth0UserName = userService.Auth0UserName;
 
@@ -68,6 +68,18 @@ namespace Gara.ViewModels
         {
             var vehicles = await restService.GetUserVehicles(userService.Auth0UserId);
             return vehicles;
+        }
+
+        private async Task NavigateToAddVehicle()
+        {
+            try
+            {
+                await navigationService.NavigateToAsync("//CreateVehiclePage");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
     }

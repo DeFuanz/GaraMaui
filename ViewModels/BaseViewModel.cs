@@ -14,11 +14,13 @@ namespace Gara.ViewModels
         protected INavigationService navigationService;
         protected IRestService restService;
         protected Auth0Client client;
-        protected BaseViewModel(INavigationService navigationService, IRestService restService, Auth0Client client)
+        protected IUserService userService;
+        protected BaseViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
         {
             this.navigationService = navigationService;
             this.restService = restService;
             this.client = client;
+            this.userService = userService;
         }
     }
 }

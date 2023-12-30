@@ -13,9 +13,8 @@ namespace Gara.ViewModels
     {
 
         public IRelayCommand LoginCommand { get; }
-        private readonly IUserService userService;
 
-        public LoginViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client)
+        public LoginViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
             this.client = client;
             this.navigationService = navigationService;

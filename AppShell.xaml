@@ -3,7 +3,7 @@
     x:Class="Gara.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Gara"
+    xmlns:local="clr-namespace:Gara.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="Gara">
 
@@ -16,5 +16,10 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:HomePage}"
         Route="HomePage" />
+
+    <ShellContent
+        Title="AddVehicle"
+        ContentTemplate="{DataTemplate local:CreateVehiclePage}"
+        Route="CreateVehiclePage" />
 
 </Shell>

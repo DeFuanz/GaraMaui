@@ -3,7 +3,7 @@ using Gara.Services;
 using Gara.ViewModels;
 using System;
 
-namespace Gara
+namespace Gara.Views    
 {
     public partial class LoginPage : ContentPage
     {

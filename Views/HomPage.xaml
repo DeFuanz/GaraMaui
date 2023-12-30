@@ -79,13 +79,16 @@ VerticalOptions="Center">
                                 HorizontalOptions="Center">
                                 <Label
                                     Text="{Binding Make}"
-                                    FontSize="Default"/>
+                                    FontSize="Default"
+                                    Padding="2"/>
                                 <Label
                                     Text="{Binding Model}"
-                                    FontSize="Default"/>
+                                    FontSize="Default"
+                                    Padding="2"/>
                                 <Label
                                     Text="{Binding Year}"
-                                    FontSize="Default"/>
+                                    FontSize="Default"
+                                    Padding="2"/>
                             </HorizontalStackLayout>
 
                         </Frame>

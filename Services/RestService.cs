@@ -47,13 +47,6 @@ namespace Gara.Services
             };
         }
 
-        public async Task<string> TestApiConnection()
-        {
-            var response = await client.GetAsync(uri);
-            Debug.Assert(response.IsSuccessStatusCode);
-            return await response.Content.ReadAsStringAsync();
-        }
-
         //Get all vehicles for all users (useful in needing to create a new vehicle)
         public async Task<List<Vehicle>> GetVehicles()
         {

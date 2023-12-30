@@ -23,8 +23,9 @@ namespace Gara.ViewModels
             get => auth0UserName;
             set => SetProperty(ref auth0UserName, value);
         }
+        
 
-        public List<Vehicle> Vehicles { get; } = new();
+        public ObservableCollection<Vehicle> Vehicles { get; } = new();
 
 
         public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -34,9 +35,7 @@ namespace Gara.ViewModels
             this.client = client;
             this.userService = userService;
 
-            Vehicles = Task.Run(GetUserVehiclesAsync).Result;
-
-            RefreshCommand = new Command(async () => await LoadVehiclesAsync());
+            RefreshCommand = new Command(async () => await GetUserVehiclesAsync());
             NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
 
             
@@ -44,23 +43,26 @@ namespace Gara.ViewModels
 
         }
 
-
-        //Load all vehicles (probably refactor to create page once built)
-        private async Task LoadVehiclesAsync()
+        //Initialze vehicles on load to make sure refreshed during navigation. (check HomePage.xaml.cs)
+        public async Task InitializeAsync()
         {
+            await GetUserVehiclesAsync();
+        }
+
+
+        //Get user vehicles
+        private async Task GetUserVehiclesAsync()
+        {
+            var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
+
+            // Clear the existing collection
             Vehicles.Clear();
-            var vehicles = await GetUserVehiclesAsync();
-            foreach (var vehicle in vehicles)
+
+            // Repopulate the collection with the new data
+            foreach (var vehicle in userVehicles)
             {
                 Vehicles.Add(vehicle);
             }
-        }
-
-        //Get user vehicles
-        private async Task<List<Vehicle>> GetUserVehiclesAsync()
-        {
-            var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
-            return userVehicles;
         }
 
         private async Task NavigateToAddVehicle()

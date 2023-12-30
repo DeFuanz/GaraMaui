@@ -10,7 +10,12 @@
         <Label 
             Text="Create a new vehicle"
             HorizontalOptions="Center" />
-        <Entry Text="{Binding EnteredVehicleId}"/>
+        <Picker
+            ItemsSource="{Binding Vehicles}"
+            ItemDisplayBinding="{Binding Make}"
+            SelectedItem="{Binding SelectedVehicle}"
+            Title="Select a Vehicle"/>
+
         <Button Text="Add Vehicle" Command="{Binding AddVehicleCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

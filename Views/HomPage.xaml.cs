@@ -6,9 +6,17 @@ namespace Gara.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
+    private HomeViewModel viewModel;
+    public HomePage(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
 	{
         InitializeComponent();
-        BindingContext = new HomeViewModel(navigationService, restService, client, userService);
+        viewModel = new HomeViewModel(navigationService, restService, client, userService);
+        BindingContext = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.InitializeAsync();
     }
 }

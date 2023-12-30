@@ -10,7 +10,6 @@ namespace Gara.Services
 {
     public interface IRestService
     {
-        Task<string> TestApiConnection();
 
         Task<List<Vehicle>> GetVehicles();
 

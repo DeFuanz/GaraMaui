@@ -12,14 +12,28 @@ namespace Gara.ViewModels
 {
     public class CreateVehicleViewModel : BaseViewModel
     {
-        private string enteredVehicleId;
+        private int selectedVehicleId;
+        private Vehicle selectedVehicle;
 
-        public string EnteredVehicleId
+        public int SelectedVehicleId
         {
-            get => enteredVehicleId;
-            set => SetProperty(ref enteredVehicleId, value);
+            get => selectedVehicleId;
+            set => SetProperty(ref selectedVehicleId, value);
         }
 
+        public Vehicle SelectedVehicle
+        {
+            get => selectedVehicle;
+            set
+            {
+                if (SetProperty(ref selectedVehicle, value))
+                {
+                    SelectedVehicleId = selectedVehicle.VehicleId;
+                }
+            }
+        }
+
+        public List<Vehicle> Vehicles { get; } = new List<Vehicle>();
 
         public Command AddVehicleCommand { get; }
         public CreateVehicleViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -29,6 +43,8 @@ namespace Gara.ViewModels
             this.client = client;
             this.userService = userService;
 
+            Vehicles = Task.Run(GetAllVehicles).Result;
+
             AddVehicleCommand = new Command(async () => await AddVehicleAsync());
         }
 
@@ -37,7 +53,7 @@ namespace Gara.ViewModels
             var userVehicle = new UserVehicle
             {
                 UserId = userService.Auth0UserId,
-                VehicleId = Convert.ToInt32(enteredVehicleId)
+                VehicleId = selectedVehicleId
             };
             try
             {
@@ -48,6 +64,12 @@ namespace Gara.ViewModels
                 Debug.WriteLine(ex);
             }
             await navigationService.NavigateToAsync("//HomePage");
+        }
+
+        public async Task<List<Vehicle>> GetAllVehicles()
+        {
+            var vehicles = await restService.GetVehicles();
+            return vehicles;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Gara.ViewModels
 {
     public class HomeViewModel : BaseViewModel 
     {
-        public Command TestApiCommand { get; }
         public Command RefreshCommand { get; }
         public Command NavigateToAddVehicleCommand { get; }
 
@@ -35,8 +34,6 @@ namespace Gara.ViewModels
             this.userService = userService;
 
 
-            TestApiCommand = new Command(async () => await TestApiAsync());
-
             RefreshCommand = new Command(async () => await LoadVehiclesAsync());
             NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
 
@@ -45,12 +42,6 @@ namespace Gara.ViewModels
 
         }
 
-        //Test Api connection
-        private async Task<string> TestApiAsync()
-        {
-            var result = await restService.TestApiConnection();
-            return result;
-        }
 
         //Load all vehicles (probably refactor to create page once built)
         private async Task LoadVehiclesAsync()
@@ -66,8 +57,8 @@ namespace Gara.ViewModels
         //Get user vehicles
         private async Task<List<Vehicle>> GetUserVehiclesAsync()
         {
-            var vehicles = await restService.GetUserVehicles(userService.Auth0UserId);
-            return vehicles;
+            var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
+            return userVehicles;
         }
 
         private async Task NavigateToAddVehicle()

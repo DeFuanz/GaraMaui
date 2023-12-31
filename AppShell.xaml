@@ -22,4 +22,9 @@
         ContentTemplate="{DataTemplate local:CreateVehiclePage}"
         Route="CreateVehiclePage" />
 
+    <ShellContent
+        Title="VehicleDetails"
+        ContentTemplate="{DataTemplate local:VehicleDetailsPage}"
+        Route="VehicleDetailsPage" />
+
 </Shell>

@@ -70,23 +70,26 @@ VerticalOptions="Center">
             ItemsSource="{Binding Vehicles}"
             EmptyView="No Vehicles">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Vehicle">
+                <DataTemplate x:DataType="model:UserVehicle">
                     <StackLayout>
                         <Frame
                             Margin="4">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=NavigateToVehicleDetailsCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
                             <HorizontalStackLayout
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center">
                                 <Label
-                                    Text="{Binding Make}"
+                                    Text="{Binding Vehicle.Make}"
                                     FontSize="Default"
                                     Padding="2"/>
                                 <Label
-                                    Text="{Binding Model}"
+                                    Text="{Binding Vehicle.Model}"
                                     FontSize="Default"
                                     Padding="2"/>
                                 <Label
-                                    Text="{Binding Year}"
+                                    Text="{Binding Vehicle.Year}"
                                     FontSize="Default"
                                     Padding="2"/>
                             </HorizontalStackLayout>

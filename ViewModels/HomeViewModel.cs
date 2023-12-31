@@ -16,6 +16,7 @@ namespace Gara.ViewModels
     {
         public Command RefreshCommand { get; }
         public Command NavigateToAddVehicleCommand { get; }
+        public Command NavigateToVehicleDetailsCommand { get; } 
 
         private string auth0UserName;
         public string Auth0UserName
@@ -25,7 +26,7 @@ namespace Gara.ViewModels
         }
         
 
-        public ObservableCollection<Vehicle> Vehicles { get; } = new();
+        public ObservableCollection<UserVehicle> Vehicles { get; } = new();
 
 
         public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -37,8 +38,9 @@ namespace Gara.ViewModels
 
             RefreshCommand = new Command(async () => await GetUserVehiclesAsync());
             NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
+            NavigateToVehicleDetailsCommand = new Command<UserVehicle>(async (userVehicle) => await NavigateToVehicleDetails(userVehicle));
 
-            
+
             Auth0UserName = userService.Auth0UserName;
 
         }
@@ -55,11 +57,11 @@ namespace Gara.ViewModels
         {
             try
             {
-                var vehicles = await restService.GetUserVehicles(userService.Auth0UserId);
+                var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
                 Vehicles.Clear();
-                foreach (var userVehicle in vehicles)
+                foreach (var userVehicle in userVehicles)
                 {
-                    Vehicles.Add(userVehicle.Vehicle);
+                    Vehicles.Add(userVehicle);
                 }
             }
             catch (Exception ex)
@@ -73,6 +75,18 @@ namespace Gara.ViewModels
             try
             {
                 await navigationService.NavigateToAsync("//CreateVehiclePage");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private async Task NavigateToVehicleDetails(UserVehicle userVehicle)
+        {
+            try
+            {
+                await navigationService.NavigateToAsync("//VehicleDetailsPage", new Dictionary<string, object> { { "userVehicle", userVehicle } });
             }
             catch (Exception ex)
             {

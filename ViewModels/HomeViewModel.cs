@@ -14,6 +14,9 @@ namespace Gara.ViewModels
 {
     public class HomeViewModel : BaseViewModel 
     {
+        private INavigationDataService NavigationDataService;
+
+
         public Command RefreshCommand { get; }
         public Command NavigateToAddVehicleCommand { get; }
         public Command NavigateToVehicleDetailsCommand { get; } 
@@ -29,12 +32,14 @@ namespace Gara.ViewModels
         public ObservableCollection<UserVehicle> Vehicles { get; } = new();
 
 
-        public HomeViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
+        public HomeViewModel(INavigationDataService navigationData,INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
             this.restService = restService;
             this.navigationService = navigationService;
             this.client = client;
             this.userService = userService;
+
+            NavigationDataService = navigationData;
 
             RefreshCommand = new Command(async () => await GetUserVehiclesAsync());
             NavigateToAddVehicleCommand = new Command(async () => await NavigateToAddVehicle());
@@ -86,7 +91,9 @@ namespace Gara.ViewModels
         {
             try
             {
-                await navigationService.NavigateToAsync("//VehicleDetailsPage", new Dictionary<string, object> { { "userVehicle", userVehicle } });
+                INavigationDataService navigationDataService = NavigationDataService;
+                navigationDataService.SetData("CurrentVehicle", userVehicle);
+                await navigationService.NavigateToAsync($"//VehicleDetailsPage");
             }
             catch (Exception ex)
             {

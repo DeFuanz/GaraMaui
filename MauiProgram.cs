@@ -46,6 +46,8 @@ namespace Gara
 
             builder.Services.AddSingleton<IUserService, UserService>();
 
+            builder.Services.AddSingleton<INavigationDataService, NavigationDataService>();
+
             builder.Services.AddTransient<LoginViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
@@ -57,6 +59,10 @@ namespace Gara
             builder.Services.AddTransient<CreateVehicleViewModel>();
 
             builder.Services.AddTransient<CreateVehiclePage>();
+
+            builder.Services.AddTransient<VehicleDetailsViewModel>();
+
+            builder.Services.AddTransient<VehicleDetailsPage>();
 
 
             return builder.Build();

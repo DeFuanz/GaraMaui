@@ -14,7 +14,8 @@
             ItemsSource="{Binding Vehicles}"
             ItemDisplayBinding="{Binding Make}"
             SelectedItem="{Binding SelectedVehicle}"
-            Title="Select a Vehicle"/>
+            Title="Select a Vehicle"
+            HeightRequest="75"/>
 
         <Button Text="Add Vehicle" Command="{Binding AddVehicleCommand}"/>
     </VerticalStackLayout>

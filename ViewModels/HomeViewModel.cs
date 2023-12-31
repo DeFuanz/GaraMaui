@@ -53,15 +53,18 @@ namespace Gara.ViewModels
         //Get user vehicles
         private async Task GetUserVehiclesAsync()
         {
-            var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
-
-            // Clear the existing collection
-            Vehicles.Clear();
-
-            // Repopulate the collection with the new data
-            foreach (var vehicle in userVehicles)
+            try
             {
-                Vehicles.Add(vehicle);
+                var vehicles = await restService.GetUserVehicles(userService.Auth0UserId);
+                Vehicles.Clear();
+                foreach (var userVehicle in vehicles)
+                {
+                    Vehicles.Add(userVehicle.Vehicle);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

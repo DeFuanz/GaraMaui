@@ -13,7 +13,7 @@ namespace Gara.Services
 
         Task<List<Vehicle>> GetVehicles();
 
-        Task<List<Vehicle>> GetUserVehicles(string userid);
+        Task<List<UserVehicle>> GetUserVehicles(string userid);
 
         Task AddVehicle(UserVehicle userVehicle);
     }

@@ -15,5 +15,6 @@ namespace Gara.Models
         public int VehicleId { get; set; }
 
         public Vehicle? Vehicle { get; set; } = default!;
+        public List<GasFillUp>? GasFillUp { get; set; } = default!;
     }
 }

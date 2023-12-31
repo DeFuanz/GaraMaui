@@ -69,7 +69,7 @@ namespace Gara.Services
         }
 
         //Get vehicles that belong to a specific user
-        public async Task<List<Vehicle>> GetUserVehicles(string userid)
+        public async Task<List<UserVehicle>> GetUserVehicles(string userid)
         {
             Uri userVehicleUri = new Uri(uri, $"api/Vehicle/{userid}");
 
@@ -81,7 +81,7 @@ namespace Gara.Services
                 {
                     try
                     {
-                        var vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, jsonSerializationOptions);
+                        var vehicles = JsonSerializer.Deserialize<List<UserVehicle>>(json, jsonSerializationOptions);
                         return vehicles;
                     }
                     catch (JsonException ex)
@@ -94,7 +94,7 @@ namespace Gara.Services
                 else
                 {
                     // Handle the case where JSON content is null or empty
-                    return new List<Vehicle>();
+                    return new List<UserVehicle>();
                 }
             }
             else

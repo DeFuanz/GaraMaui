@@ -10,7 +10,7 @@ namespace Gara.Models
 {
     public class UserVehicle
     {
-        public int user_vehicle_id { get; set; }
+        public int UserVehicleId { get; set; }
         public string UserId { get; set; } = default!;
         public int VehicleId { get; set; }
 

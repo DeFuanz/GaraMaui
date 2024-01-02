@@ -14,22 +14,22 @@ namespace Gara.ViewModels
 {
     public class HomeViewModel : BaseViewModel 
     {
-        private INavigationDataService NavigationDataService;
+        private readonly INavigationDataService NavigationDataService;
 
 
         public Command RefreshCommand { get; }
         public Command NavigateToAddVehicleCommand { get; }
         public Command NavigateToVehicleDetailsCommand { get; } 
 
-        private string auth0UserName;
-        public string Auth0UserName
+        private string? auth0UserName;
+        public string? Auth0UserName
         {
             get => auth0UserName;
             set => SetProperty(ref auth0UserName, value);
         }
         
 
-        public ObservableCollection<UserVehicle> Vehicles { get; } = new();
+        public ObservableCollection<UserVehicle> Vehicles { get; } = [];
 
 
         public HomeViewModel(INavigationDataService navigationData,INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -93,7 +93,7 @@ namespace Gara.ViewModels
             {
                 INavigationDataService navigationDataService = NavigationDataService;
                 navigationDataService.SetData("CurrentVehicle", userVehicle);
-                await navigationService.NavigateToAsync($"//VehicleDetailsPage");
+                await navigationService.NavigateToAsync("//VehicleDetailsPage");
             }
             catch (Exception ex)
             {

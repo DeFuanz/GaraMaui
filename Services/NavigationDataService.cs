@@ -9,17 +9,13 @@ namespace Gara.Services
     //Store objects that need to be passed between pages
     public class NavigationDataService : INavigationDataService
     {
-        private readonly Dictionary<string, object> _navigationData = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _navigationData = [];
 
         public void SetData(string key, object data)
         {
-            if (_navigationData.ContainsKey(key))
+            if (!_navigationData.TryAdd(key, data))
             {
                 _navigationData[key] = data;
-            }
-            else
-            {
-                _navigationData.Add(key, data);
             }
         }
 
@@ -29,7 +25,7 @@ namespace Gara.Services
             {
                 return data;
             }
-            return null;
+            return null!;
         }
     }
 }

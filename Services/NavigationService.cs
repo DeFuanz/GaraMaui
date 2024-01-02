@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,17 @@ namespace Gara.Services
         //Pop navigation to previous page
         public Task PopAsync()
         {
-            return Shell.Current.GoToAsync("..");
+            if (Shell.Current.Navigation.NavigationStack.Count > 1)
+            {
+                return Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                Debug.WriteLine("There's only one page on the stack, can't pop");
+                // There's only one page on the stack, can't pop, handle accordingly
+                // Maybe ignore or alert the user
+                return Task.CompletedTask;
+            }
         }
     }
 }

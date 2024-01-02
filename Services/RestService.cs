@@ -21,7 +21,7 @@ namespace Gara.Services
 
         private readonly Uri uri;
 
-        private static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions
+        private static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new()
         {
             PropertyNameCaseInsensitive = true
         };
@@ -50,7 +50,7 @@ namespace Gara.Services
         //Get all vehicles for all users (useful in needing to create a new vehicle)
         public async Task<List<Vehicle>> GetVehicles()
         {
-            Uri allVehicleUri = new Uri(uri, $"api/Vehicle");
+            Uri allVehicleUri = new(uri, $"api/Vehicle");
 
             var response = await client.GetAsync(allVehicleUri);
 
@@ -59,7 +59,7 @@ namespace Gara.Services
                 var json = await response.Content.ReadAsStringAsync();
                 Debug.Assert(json != null);
                 var vehicles = JsonSerializer.Deserialize<List<Vehicle>>(json, jsonSerializationOptions);
-                return vehicles;
+                return vehicles!;
             }
             else
             {
@@ -71,7 +71,7 @@ namespace Gara.Services
         //Get vehicles that belong to a specific user
         public async Task<List<UserVehicle>> GetUserVehicles(string userid)
         {
-            Uri userVehicleUri = new Uri(uri, $"api/Vehicle/{userid}");
+            Uri userVehicleUri = new(uri, $"api/Vehicle/{userid}");
 
             var response = await client.GetAsync(userVehicleUri);
             if (response.IsSuccessStatusCode)
@@ -82,7 +82,7 @@ namespace Gara.Services
                     try
                     {
                         var vehicles = JsonSerializer.Deserialize<List<UserVehicle>>(json, jsonSerializationOptions);
-                        return vehicles;
+                        return vehicles!;
                     }
                     catch (JsonException ex)
                     {
@@ -94,7 +94,7 @@ namespace Gara.Services
                 else
                 {
                     // Handle the case where JSON content is null or empty
-                    return new List<UserVehicle>();
+                    return [];
                 }
             }
             else
@@ -106,15 +106,12 @@ namespace Gara.Services
 
         public async Task AddVehicle(UserVehicle userVehicle)
         {
-            Uri userVehicleUri = new Uri(uri, "api/Vehicle");
+            Uri userVehicleUri = new(uri, "api/Vehicle");
             Debug.WriteLine($"POST request to {userVehicleUri}");
             var content = JsonContent.Create(userVehicle);
-            HttpResponseMessage response = null;
-
             try
             {
-                response = await client.PostAsync(userVehicleUri, content);
-
+                HttpResponseMessage? response = await client.PostAsync(userVehicleUri, content);
                 if (response.IsSuccessStatusCode)
                 {
                     // Handle success

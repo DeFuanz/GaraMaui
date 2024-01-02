@@ -34,14 +34,14 @@ namespace Gara.ViewModels
 
                 if (!loginResult.IsError && loginResult.User != null)
                 {
-                    userService.Auth0UserName = loginResult.User.Identity.Name;
+                    userService.Auth0UserName = loginResult.User.Identity!.Name!;
                     foreach (var claim in loginResult.User.Claims)
                     {
                         Console.WriteLine($"Type: {claim.Type}, Value: {claim.Value}");
                     }
                     var userId = loginResult.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
-                    var splitId = userId.Split("|");
+                    var splitId = userId!.Split("|");
                     if (splitId.Length == 2)
                     {
                         userService.Auth0UserId = splitId[1];

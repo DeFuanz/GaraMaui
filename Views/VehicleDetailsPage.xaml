@@ -6,7 +6,11 @@
              x:DataType="viewmodel:VehicleDetailsViewModel"
              xmlns:model="clr-namespace:Gara.Models"
              Title="VehicleDetailsPage">
+    
     <VerticalStackLayout>
+        <Button
+            Text="Back"
+            Command="{Binding BackCommand}"/>
         <Label 
             Text="{Binding UserVehicle.Vehicle.Make}"
             VerticalOptions="Center" 

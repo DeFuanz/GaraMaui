@@ -12,33 +12,33 @@ namespace Gara.ViewModels
 {
     public class CreateVehicleViewModel : BaseViewModel
     {
-        public List<Vehicle> Vehicles { get; set; }
+        public List<Vehicle>? Vehicles { get; set; }
 
 
-        private List<string> makes;
-        public List<string> Makes
+        private List<string>? makes;
+        public List<string>? Makes
         {
             get => makes;
             set => SetProperty(ref makes, value);
         }
 
-        private List<string> models;
-        public List<string> Models
+        private List<string>? models;
+        public List<string>? Models
         {
             get => models;
             set => SetProperty(ref models, value);
         }
 
-        private List<int> years;
-        public List<int> Years
+        private List<int>? years;
+        public List<int>? Years
         {
             get => years;
             set => SetProperty(ref years, value);
         }
 
 
-        private string selectedMake;
-        public string SelectedMake
+        private string? selectedMake;
+        public string? SelectedMake
         {
             get => selectedMake;
             set
@@ -48,8 +48,8 @@ namespace Gara.ViewModels
             }
         }
 
-        private string selectedModel;
-        public string SelectedModel
+        private string? selectedModel;
+        public string? SelectedModel
         {
             get => selectedModel;
             set
@@ -59,8 +59,8 @@ namespace Gara.ViewModels
             }
         }
 
-        private int selectedYear;
-        public int SelectedYear
+        private int? selectedYear;
+        public int? SelectedYear
         {
             get => selectedYear;
             set
@@ -79,7 +79,7 @@ namespace Gara.ViewModels
             this.client = client;
             this.userService = userService;
 
-            InitializeAsync();
+            _ = InitializeAsync();
 
             AddVehicleCommand = new Command(async () => await AddVehicleAsync());
         }
@@ -97,9 +97,9 @@ namespace Gara.ViewModels
             }
         }
 
-        public async Task AddVehicleAsync()
+        private async Task AddVehicleAsync()
         {
-            var vehicleIdforBuild = Vehicles.Where(v => v.Make == selectedMake && v.Model == selectedModel && v.Year == selectedYear).FirstOrDefault().VehicleId;
+            var vehicleIdforBuild = Vehicles!.Where(v => v.Make == selectedMake && v.Model == selectedModel && v.Year == selectedYear).FirstOrDefault()!.VehicleId;
             
             var userVehicle = new UserVehicle
             {
@@ -117,7 +117,7 @@ namespace Gara.ViewModels
             await navigationService.NavigateToAsync("//HomePage");
         }
 
-        public async Task<List<Vehicle>> GetAllVehicles()
+        private async Task<List<Vehicle>> GetAllVehicles()
         {
             var vehicles = await restService.GetVehicles();
             return vehicles;
@@ -127,7 +127,7 @@ namespace Gara.ViewModels
         {
             try
             {
-                Models = Vehicles.Where(m => m.Make == make).Select(m => m.Model).ToList();
+                Models = Vehicles!.Where(m => m.Make == make).Select(m => m.Model).ToList();
             }
             catch (Exception ex)
             {
@@ -136,11 +136,11 @@ namespace Gara.ViewModels
             Debug.Assert(models != null);
         }
 
-        public void GetYearsByModel(string? model)
+        private void GetYearsByModel(string? model)
         {
             try
             {
-                Years = Vehicles.Where(m => m.Model == model).Select(m => m.Year).ToList();
+                Years = Vehicles!.Where(m => m.Model == model).Select(m => m.Year).ToList();
             }
             catch (Exception ex)
             {

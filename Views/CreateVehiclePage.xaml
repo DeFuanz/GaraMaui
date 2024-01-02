@@ -11,11 +11,22 @@
             Text="Create a new vehicle"
             HorizontalOptions="Center" />
         <Picker
-            ItemsSource="{Binding Vehicles}"
-            ItemDisplayBinding="{Binding Make}"
-            SelectedItem="{Binding SelectedVehicle}"
-            Title="Select a Vehicle"
-            HeightRequest="75"/>
+    ItemsSource="{Binding Makes}"
+    SelectedItem="{Binding SelectedMake}"
+    Title="Select a Make"
+    HeightRequest="75"/>
+
+        <Picker
+    ItemsSource="{Binding Models}"
+    SelectedItem="{Binding SelectedModel}"
+    Title="Select a Model"
+    HeightRequest="75"/>
+
+        <Picker
+ItemsSource="{Binding Years}"
+SelectedItem="{Binding SelectedYear}"
+Title="Select a Model Year"
+HeightRequest="75"/>
 
         <Button Text="Add Vehicle" Command="{Binding AddVehicleCommand}"/>
     </VerticalStackLayout>

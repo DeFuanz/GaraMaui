@@ -12,28 +12,64 @@ namespace Gara.ViewModels
 {
     public class CreateVehicleViewModel : BaseViewModel
     {
-        private int selectedVehicleId;
-        private Vehicle selectedVehicle;
+        public List<Vehicle> Vehicles { get; set; }
 
-        public int SelectedVehicleId
+
+        private List<string> makes;
+        public List<string> Makes
         {
-            get => selectedVehicleId;
-            set => SetProperty(ref selectedVehicleId, value);
+            get => makes;
+            set => SetProperty(ref makes, value);
         }
 
-        public Vehicle SelectedVehicle
+        private List<string> models;
+        public List<string> Models
         {
-            get => selectedVehicle;
+            get => models;
+            set => SetProperty(ref models, value);
+        }
+
+        private List<int> years;
+        public List<int> Years
+        {
+            get => years;
+            set => SetProperty(ref years, value);
+        }
+
+
+        private string selectedMake;
+        public string SelectedMake
+        {
+            get => selectedMake;
             set
             {
-                if (SetProperty(ref selectedVehicle, value))
-                {
-                    SelectedVehicleId = selectedVehicle.VehicleId;
-                }
+                SetProperty(ref selectedMake, value);
+                GetModelsByMake(value);
             }
         }
 
-        public List<Vehicle> Vehicles { get; } = new List<Vehicle>();
+        private string selectedModel;
+        public string SelectedModel
+        {
+            get => selectedModel;
+            set
+            {
+                SetProperty(ref selectedModel, value);
+                GetYearsByModel(value);
+            }
+        }
+
+        private int selectedYear;
+        public int SelectedYear
+        {
+            get => selectedYear;
+            set
+            {
+                SetProperty(ref selectedYear, value);
+            }
+        }
+
+
 
         public Command AddVehicleCommand { get; }
         public CreateVehicleViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
@@ -43,17 +79,32 @@ namespace Gara.ViewModels
             this.client = client;
             this.userService = userService;
 
-            Vehicles = Task.Run(GetAllVehicles).Result;
+            InitializeAsync();
 
             AddVehicleCommand = new Command(async () => await AddVehicleAsync());
         }
 
+        private async Task InitializeAsync()
+        {
+            try
+            {
+                Vehicles = await GetAllVehicles();
+                Makes = Vehicles.Select(v => v.Make).Distinct().ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
         public async Task AddVehicleAsync()
         {
+            var vehicleIdforBuild = Vehicles.Where(v => v.Make == selectedMake && v.Model == selectedModel && v.Year == selectedYear).FirstOrDefault().VehicleId;
+            
             var userVehicle = new UserVehicle
             {
                 UserId = userService.Auth0UserId,
-                VehicleId = selectedVehicleId
+                VehicleId = vehicleIdforBuild
             };
             try
             {
@@ -70,6 +121,32 @@ namespace Gara.ViewModels
         {
             var vehicles = await restService.GetVehicles();
             return vehicles;
+        }
+
+        public void GetModelsByMake(string? make)
+        {
+            try
+            {
+                Models = Vehicles.Where(m => m.Make == make).Select(m => m.Model).ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            Debug.Assert(models != null);
+        }
+
+        public void GetYearsByModel(string? model)
+        {
+            try
+            {
+                Years = Vehicles.Where(m => m.Model == model).Select(m => m.Year).ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            Debug.Assert(years != null);
         }
     }
 }

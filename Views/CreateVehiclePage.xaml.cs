@@ -1,4 +1,5 @@
 using Gara.Auth0;
+using Gara.Models;
 using Gara.Services;
 using Gara.ViewModels;
 
@@ -10,5 +11,6 @@ public partial class CreateVehiclePage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = new CreateVehicleViewModel(navigationService, restService, client, userService);
+
     }
 }

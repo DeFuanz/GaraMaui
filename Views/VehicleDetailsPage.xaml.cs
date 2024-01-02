@@ -7,9 +7,17 @@ namespace Gara.Views;
 
 public partial class VehicleDetailsPage : ContentPage
 {
-	public VehicleDetailsPage(INavigationDataService navigationDataService, INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
+    private VehicleDetailsViewModel viewModel;
+    public VehicleDetailsPage(INavigationDataService navigationDataService, INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
 	{
 		InitializeComponent();
-        BindingContext = new VehicleDetailsViewModel(navigationDataService,navigationService, restService, client, userService);
+        viewModel = new VehicleDetailsViewModel(navigationDataService,navigationService, restService, client, userService);
+        BindingContext = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.InitializeAsync();
     }
 }

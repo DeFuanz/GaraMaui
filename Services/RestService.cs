@@ -167,5 +167,23 @@ namespace Gara.Services
                 throw;
             }
         }
+
+        public async Task<List<GasFillUp>> GetGasFillUps(int userVehicleId)
+        {
+            Uri gasUri = new(uri, $"/api/Gas/{userVehicleId}");
+            Debug.WriteLine($"GET request to {gasUri}");
+            var response = await client.GetAsync(gasUri);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var gasFillUps = JsonSerializer.Deserialize<List<GasFillUp>>(json, jsonSerializationOptions);
+                return gasFillUps!;
+            }
+            else
+            {
+                // Handle the error or throw an exception
+                throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
+            }
+        }
     }
 }

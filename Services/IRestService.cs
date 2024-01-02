@@ -18,5 +18,7 @@ namespace Gara.Services
         Task AddVehicle(UserVehicle userVehicle);
 
         Task AddGassFillUp(GasFillUp gasFillUp);
+
+        Task<List<GasFillUp>> GetGasFillUps(int userVehicleId);
     }
 }

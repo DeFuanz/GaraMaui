@@ -7,7 +7,8 @@
              xmlns:model="clr-namespace:Gara.Models"
              Title="VehicleDetailsPage">
     
-    <VerticalStackLayout>
+    <FlexLayout
+        Direction="Column">
         <Button
             Text="Back"
             Command="{Binding BackCommand}"/>
@@ -28,8 +29,47 @@
                 Padding="2"/>
         </HorizontalStackLayout>
 
+        <HorizontalStackLayout
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Frame>
+                <StackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <Label
+                        Text="Recent Gas Fills"
+                        FontSize="Title"
+                        Padding="2"/>
+                    <CollectionView
+                        ItemsSource="{Binding GasFillUps}"
+                        EmptyView="No Refuels">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:GasFillUp">
+                                <HorizontalStackLayout
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center">
+                                    <Label
+                                        Text="{Binding FillUpDate}"
+                                        FontSize="Default"
+                                        Padding="2"/>
+                                    <Label
+                                        Text="{Binding GallonsFilled}"
+                                        FontSize="Default"
+                                        Padding="2"/>
+                                    <Label
+                                        Text="{Binding PricePerGallon}"
+                                        FontSize="Default"
+                                        Padding="2"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Frame>
+        </HorizontalStackLayout>
+
         <Button
             Text="Add Refuel"
             Command="{Binding NavigateToAddRefuelCommand}"/>
-    </VerticalStackLayout>
+    </FlexLayout>
 </ContentPage>

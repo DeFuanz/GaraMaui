@@ -3,6 +3,7 @@ using Gara.Models;
 using Gara.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Gara.ViewModels
     class VehicleDetailsViewModel : BaseViewModel
     {
         public UserVehicle? UserVehicle { get; set; }
+        public ObservableCollection<GasFillUp>? GasFillUps { get; } = [];
 
         private readonly INavigationDataService NavigationDataService;
 
@@ -31,6 +33,27 @@ namespace Gara.ViewModels
             BackCommand = new Command(async () => await navigationService.NavigateToAsync("//HomePage"));
             NavigateToAddRefuelCommand = new Command(async () => await navigationService.NavigateToAsync("//AddRefuelPage"));
 
+        }
+
+        public async Task InitializeAsync()
+        {
+            await GetGasRefuelingsAsync(UserVehicle!.UserVehicleId);
+        }
+
+        private async Task GetGasRefuelingsAsync(int userVehicleId)
+        {
+            try
+            {
+                var vehicleGasFills = await restService.GetGasFillUps(userVehicleId);
+                foreach (var gasFill in vehicleGasFills)
+                {
+                    GasFillUps!.Add(gasFill);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
     }

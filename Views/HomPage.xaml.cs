@@ -6,7 +6,7 @@ namespace Gara.Views;
 
 public partial class HomePage : ContentPage
 {
-    private HomeViewModel viewModel;
+    private readonly HomeViewModel viewModel;
     public HomePage(INavigationDataService navigationDataService ,INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService)
 	{
         InitializeComponent();

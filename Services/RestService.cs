@@ -140,5 +140,32 @@ namespace Gara.Services
                 throw; // Re-throw the exception if you want to handle it further up the call stack
             }
         }
+
+        public async Task AddGassFillUp(GasFillUp gasFillUp)
+        {
+            Uri gasUri = new(uri, "/api/Gas");
+            Debug.WriteLine($"POST request to {gasUri}");
+            var content = JsonContent.Create(gasFillUp);
+            try
+            {
+                HttpResponseMessage? response = await client.PostAsync(gasUri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Handle success
+                    Debug.WriteLine("Gas fill up added successfully.");
+                }
+                else
+                {
+                    // Read the response content for detailed error information
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Request failed with status code {response.StatusCode} and content: {responseContent}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occurred: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

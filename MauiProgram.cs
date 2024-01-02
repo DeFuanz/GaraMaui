@@ -64,6 +64,10 @@ namespace Gara
 
             builder.Services.AddTransient<VehicleDetailsPage>();
 
+            builder.Services.AddTransient<AddRefuelViewModel>();
+
+            builder.Services.AddScoped<AddRefuelPage>();
+
 
             return builder.Build();
         }

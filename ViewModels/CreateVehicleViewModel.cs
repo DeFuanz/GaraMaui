@@ -72,6 +72,7 @@ namespace Gara.ViewModels
 
 
         public Command AddVehicleCommand { get; }
+        public Command BackCommand { get; }
         public CreateVehicleViewModel(INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
             this.restService = restService;
@@ -82,6 +83,7 @@ namespace Gara.ViewModels
             _ = InitializeAsync();
 
             AddVehicleCommand = new Command(async () => await AddVehicleAsync());
+            BackCommand = new Command(async () => await navigationService.NavigateToAsync("//HomePage"));
         }
 
         private async Task InitializeAsync()

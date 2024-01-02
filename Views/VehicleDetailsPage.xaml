@@ -11,9 +11,25 @@
         <Button
             Text="Back"
             Command="{Binding BackCommand}"/>
-        <Label 
-            Text="{Binding UserVehicle.Vehicle.Make}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <HorizontalStackLayout
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Label
+                Text="{Binding UserVehicle.Vehicle.Make}"
+                FontSize="Default"
+                Padding="2"/>
+            <Label
+                Text="{Binding UserVehicle.Vehicle.Model}"
+                FontSize="Default"
+                Padding="2"/>
+            <Label
+                Text="{Binding UserVehicle.Vehicle.Year}"
+                FontSize="Default"
+                Padding="2"/>
+        </HorizontalStackLayout>
+
+        <Button
+            Text="Add Refuel"
+            Command="{Binding NavigateToAddRefuelCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

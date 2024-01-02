@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gara.Views.AddRefuelPage"
+             xmlns:viewmodel="clr-namespace:Gara.ViewModels"
+             x:DataType="viewmodel:AddRefuelViewModel"
+             xmlns:model="clr-namespace:Gara.Models"
+             Title="AddRefuelPage">
+    <VerticalStackLayout>
+        <Button
+            Text="Back"
+            Command="{Binding BackCommand}"/>
+        <Label 
+            Text="Add a gasoline refueling"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <DatePicker
+            Date="{Binding FillDate}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+        
+        <Entry
+            Text="{Binding FilledGallons}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+        <Entry
+            Text="{Binding PricePerGallon}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+        <Button
+            Text="Add Refuel"
+            Command="{Binding AddRefuelCommand}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsEnabled="{Binding IsNotBusy}"/>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -17,6 +17,7 @@ namespace Gara.ViewModels
         private readonly INavigationDataService NavigationDataService;
 
         public Command BackCommand { get; }
+        public Command NavigateToAddRefuelCommand { get; }
 
         public VehicleDetailsViewModel(INavigationDataService navigationDataService ,INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
@@ -27,12 +28,10 @@ namespace Gara.ViewModels
             NavigationDataService = navigationDataService;
 
             UserVehicle = NavigationDataService.GetData("CurrentVehicle") as UserVehicle;
-            BackCommand = new Command(async () => await NavigateBack());
+            BackCommand = new Command(async () => await navigationService.NavigateToAsync("//HomePage"));
+            NavigateToAddRefuelCommand = new Command(async () => await navigationService.NavigateToAsync("//AddRefuelPage"));
+
         }
 
-        private async Task NavigateBack()
-        {
-            await navigationService.NavigateToAsync("//HomePage");
-        }
     }
 }

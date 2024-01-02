@@ -7,6 +7,9 @@
              xmlns:model="clr-namespace:Gara.Models"
              Title="Create Vehicle">
     <VerticalStackLayout>
+        <Button
+            Text="Back"
+            Command="{Binding BackCommand}"/>
         <Label 
             Text="Create a new vehicle"
             HorizontalOptions="Center" />

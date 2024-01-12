@@ -6,7 +6,8 @@
              x:DataType="viewmodel:CreateVehicleViewModel"
              xmlns:model="clr-namespace:Gara.Models"
              Title="Create Vehicle">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        MaximumWidthRequest="800">
         <Button
             Text="Back"
             Command="{Binding BackCommand}"/>

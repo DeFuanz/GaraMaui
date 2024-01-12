@@ -44,6 +44,7 @@ namespace Gara.ViewModels
         {
             try
             {
+                GasFillUps!.Clear();
                 var vehicleGasFills = await restService.GetGasFillUps(userVehicleId);
                 foreach (var gasFill in vehicleGasFills)
                 {

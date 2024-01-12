@@ -9,6 +9,7 @@
 
 
     <Grid
+        MaximumWidthRequest="800"
         HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

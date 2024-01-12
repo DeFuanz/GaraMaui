@@ -8,7 +8,8 @@
              Title="VehicleDetailsPage">
     
     <FlexLayout
-        Direction="Column">
+        Direction="Column"
+        MaximumWidthRequest="800">
         <Button
             Text="Back"
             Command="{Binding BackCommand}"/>
@@ -25,6 +26,19 @@
                 Padding="2"/>
             <Label
                 Text="{Binding UserVehicle.Vehicle.Year}"
+                FontSize="Default"
+                Padding="2"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <Label
+                Text="Total Miles: "
+                FontSize="Default"
+                Padding="2"/>
+            <Label
+                Text="{Binding UserVehicle.TotalMileage}"
                 FontSize="Default"
                 Padding="2"/>
         </HorizontalStackLayout>

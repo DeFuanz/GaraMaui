@@ -9,7 +9,8 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            MaximumWidthRequest="800">
 
             <StackLayout
                 x:Name="LoginView">

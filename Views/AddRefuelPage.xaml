@@ -6,7 +6,8 @@
              x:DataType="viewmodel:AddRefuelViewModel"
              xmlns:model="clr-namespace:Gara.Models"
              Title="AddRefuelPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        MaximumWidthRequest="800">
         <Button
             Text="Back"
             Command="{Binding BackCommand}"/>

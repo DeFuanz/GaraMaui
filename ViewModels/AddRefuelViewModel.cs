@@ -58,6 +58,7 @@ namespace Gara.ViewModels
             AddRefuelCommand = new Command(async () => await AddRefuelAsync());
         }
 
+        // TODO: Add Total Mileage addidtion updated when refuel added.
         public async Task AddRefuelAsync()
         {
             isNotBusy = false;

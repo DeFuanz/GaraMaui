@@ -35,7 +35,7 @@
                     Text="Total Gas Cost"
                     FontSize="Default"/>
                 <Label
-                    Text="0.00" />
+                    Text="{Binding TotalGasCost}" />
             </StackLayout>
         </Frame>
         <Frame

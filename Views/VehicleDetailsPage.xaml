@@ -35,7 +35,7 @@
             HorizontalOptions="Center">
             <Label
                 Text="Total Miles: "
-                FontSize="Default"
+                FontSize="Default"  
                 Padding="2"/>
             <Label
                 Text="{Binding UserVehicle.TotalMileage}"

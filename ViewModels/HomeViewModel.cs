@@ -27,7 +27,21 @@ namespace Gara.ViewModels
             get => auth0UserName;
             set => SetProperty(ref auth0UserName, value);
         }
-        
+
+        private decimal totalMiles;
+        public decimal TotalMiles
+        {
+            get => totalMiles;
+            set => SetProperty(ref totalMiles, value);
+        }
+
+        private decimal totalGasCost;
+        public decimal TotalGasCost
+        {
+            get => totalGasCost;
+            set => SetProperty(ref totalGasCost, value);
+        }
+
 
         public ObservableCollection<UserVehicle> Vehicles { get; } = [];
 
@@ -64,9 +78,11 @@ namespace Gara.ViewModels
             {
                 var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
                 Vehicles.Clear();
+                totalGasCost = 0;
                 foreach (var userVehicle in userVehicles)
                 {
                     Vehicles.Add(userVehicle);
+                    TotalGasCost += userVehicle.TotalGasCost;
                 }
             }
             catch (Exception ex)

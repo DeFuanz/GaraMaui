@@ -17,7 +17,9 @@ namespace Gara.Models
         public decimal GallonsFilled { get; set; }
 
         public decimal PricePerGallon { get; set; }
-            
+
+        public decimal MilesDriven { get; set; }
+
 
         public int UserVehicleId { get; set; }
         public UserVehicle? UserVehicle { get; set; }

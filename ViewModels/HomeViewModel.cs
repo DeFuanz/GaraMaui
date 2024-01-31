@@ -79,10 +79,12 @@ namespace Gara.ViewModels
                 var userVehicles = await restService.GetUserVehicles(userService.Auth0UserId);
                 Vehicles.Clear();
                 totalGasCost = 0;
+                totalMiles = 0;
                 foreach (var userVehicle in userVehicles)
                 {
                     Vehicles.Add(userVehicle);
                     TotalGasCost += userVehicle.TotalGasCost;
+                    TotalMiles += userVehicle.TotalMileage;
                 }
             }
             catch (Exception ex)

@@ -45,6 +45,14 @@ namespace Gara.ViewModels
             set => SetProperty(ref pricePerGallon, value);
         }
 
+        private string milesDriven;
+        public string MilesDriven
+        {
+            get => milesDriven;
+            set => SetProperty(ref milesDriven, value);
+        }
+
+
 
         public AddRefuelViewModel(INavigationDataService navigationData ,INavigationService navigationService, IRestService restService, Auth0Client client, IUserService userService) : base(navigationService, restService, client, userService)
         {
@@ -68,7 +76,8 @@ namespace Gara.ViewModels
                 FillUpDate = FillDate.ToUniversalTime(),
                 GallonsFilled = Convert.ToDecimal(FilledGallons),
                 PricePerGallon = Convert.ToDecimal(PricePerGallon),
-                UserVehicleId = userVehicle!.UserVehicleId
+                UserVehicleId = userVehicle!.UserVehicleId,
+                MilesDriven = Convert.ToDecimal(MilesDriven)
             };
             try
             {

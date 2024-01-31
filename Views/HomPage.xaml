@@ -49,7 +49,7 @@ VerticalOptions="Center">
             Text="Total Miles" 
                     FontSize="Default"/>
                 <Label
-            Text="0" />
+            Text="{Binding TotalMiles}" />
             </StackLayout>
         </Frame>
 

@@ -17,6 +17,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -68,9 +69,19 @@
             Grid.Row="4"
             Text="{Binding PricePerGallon}"/>
 
+        <Label
+            Grid.Column="0"
+            Grid.Row="5"
+            Text="Miles Driven: "/>
+
+        <Entry
+            Grid.Column="1"
+            Grid.Row="5"
+            Text="{Binding MilesDriven}"/>
+
         <Button
             Grid.ColumnSpan="2"
-            Grid.Row="5"
+            Grid.Row="6"
             Text="Add Refuel"
             Command="{Binding AddRefuelCommand}"
             IsEnabled="{Binding IsNotBusy}"/>

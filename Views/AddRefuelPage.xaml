@@ -6,37 +6,73 @@
              x:DataType="viewmodel:AddRefuelViewModel"
              xmlns:model="clr-namespace:Gara.Models"
              Title="AddRefuelPage">
-    <VerticalStackLayout
-        MaximumWidthRequest="800">
+
+    <Grid
+        MaximumWidthRequest="800"
+        HorizontalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <Button
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
             Text="Back"
             Command="{Binding BackCommand}"/>
-        <Label 
-            Text="Add a gasoline refueling"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
+        <Label 
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            Text="Add a gasoline refueling"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="2"
+            Text="Fill Date: "/>
+        
         <DatePicker
-            Date="{Binding FillDate}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            Grid.Column="1"
+            Grid.Row="2"
+            Date="{Binding FillDate}"/>
+
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="3"
+            Text="Gallons Filled: "/>
+        
         
         <Entry
-            Text="{Binding FilledGallons}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            Grid.Column="1"
+            Grid.Row="3"
+            Text="{Binding FilledGallons}"/>
 
+
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="4"
+            Text="Price Per Gallon: "/>
+        
         <Entry
-            Text="{Binding PricePerGallon}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            Grid.Column="1"
+            Grid.Row="4"
+            Text="{Binding PricePerGallon}"/>
 
         <Button
+            Grid.ColumnSpan="2"
+            Grid.Row="5"
             Text="Add Refuel"
             Command="{Binding AddRefuelCommand}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
             IsEnabled="{Binding IsNotBusy}"/>
-
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

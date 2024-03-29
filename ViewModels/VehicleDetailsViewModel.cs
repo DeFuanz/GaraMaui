@@ -14,7 +14,7 @@ namespace Gara.ViewModels
     class VehicleDetailsViewModel : BaseViewModel
     {
         public UserVehicle? UserVehicle { get; set; }
-        public ObservableCollection<GasFillUp>? GasFillUps { get; } = [];
+        public ObservableCollection<GasFillUp>? GasFillUps { get; set; } = [];
 
         private readonly INavigationDataService NavigationDataService;
 
@@ -29,7 +29,6 @@ namespace Gara.ViewModels
             this.userService = userService;
             NavigationDataService = navigationDataService;
 
-            UserVehicle = NavigationDataService.GetData("CurrentVehicle") as UserVehicle;
             BackCommand = new Command(async () => await navigationService.NavigateToAsync("//HomePage"));
             NavigateToAddRefuelCommand = new Command(async () => await navigationService.NavigateToAsync("//AddRefuelPage"));
 
@@ -37,6 +36,7 @@ namespace Gara.ViewModels
 
         public async Task InitializeAsync()
         {
+            UserVehicle = NavigationDataService.GetData("CurrentVehicle") as UserVehicle;
             await GetGasRefuelingsAsync(UserVehicle!.UserVehicleId);
         }
 
@@ -46,7 +46,7 @@ namespace Gara.ViewModels
             {
                 GasFillUps!.Clear();
                 var vehicleGasFills = await restService.GetGasFillUps(userVehicleId);
-                foreach (var gasFill in vehicleGasFills)
+                foreach (var gasFill in vehicleGasFills.OrderByDescending(x => x.FillUpDate))
                 {
                     GasFillUps!.Add(gasFill);
                 }

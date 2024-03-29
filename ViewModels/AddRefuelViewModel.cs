@@ -24,7 +24,7 @@ namespace Gara.ViewModels
             set => SetProperty(ref isNotBusy, value);
         }
 
-        private DateTime fillDate;
+        private DateTime fillDate = DateTime.Today;
         public DateTime FillDate
         {
             get => fillDate;

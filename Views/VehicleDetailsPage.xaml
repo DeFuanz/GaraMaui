@@ -6,7 +6,7 @@
              x:DataType="viewmodel:VehicleDetailsViewModel"
              xmlns:model="clr-namespace:Gara.Models"
              Title="VehicleDetailsPage">
-    
+
     <FlexLayout
         Direction="Column"
         MaximumWidthRequest="800">
@@ -43,44 +43,46 @@
                 Padding="2"/>
         </HorizontalStackLayout>
 
-        <HorizontalStackLayout
-            VerticalOptions="Center"
-            HorizontalOptions="Center">
-            <Frame>
-                <StackLayout
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center">
-                    <Label
-                        Text="Recent Gas Fills"
-                        FontSize="Title"
-                        Padding="2"/>
-                    <CollectionView
-                        ItemsSource="{Binding GasFillUps}"
-                        EmptyView="No Refuels">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:GasFillUp">
-                                <HorizontalStackLayout
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center">
-                                    <Label
-                                        Text="{Binding FillUpDate}"
-                                        FontSize="Default"
-                                        Padding="2"/>
-                                    <Label
-                                        Text="{Binding GallonsFilled}"
-                                        FontSize="Default"
-                                        Padding="2"/>
-                                    <Label
-                                        Text="{Binding PricePerGallon}"
-                                        FontSize="Default"
-                                        Padding="2"/>
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </Frame>
-        </HorizontalStackLayout>
+        
+        <Grid HorizontalOptions="CenterAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Gallons Filled" HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="Price Per Gallon" HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="2" Text="Miles Driven" HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="3" Text="Date" HorizontalTextAlignment="Center"/>
+
+
+
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding GasFillUps}" EmptyView="No Refuels">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:GasFillUp">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding GallonsFilled}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding PricePerGallon}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="2" Text="{Binding MilesDriven}" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="3" Text="{Binding FillUpDate, StringFormat='{0:MM/dd/yyyy}'}" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
 
         <Button
             Text="Add Refuel"

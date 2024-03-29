@@ -11,7 +11,6 @@ namespace Gara.Models
     {
         public int GasFillUpId { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime FillUpDate { get; set; }
 
         public decimal GallonsFilled { get; set; }

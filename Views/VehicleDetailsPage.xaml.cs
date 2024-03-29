@@ -17,7 +17,7 @@ public partial class VehicleDetailsPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
+        base.OnAppearing(); 
         await viewModel.InitializeAsync();
     }
 }

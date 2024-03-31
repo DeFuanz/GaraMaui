@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gara", "Gara.csproj", "{F0FD0653-74BA-40A1-BDE4-A7F1744E8F1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaraDbApi", "..\GaraDbApi\GaraDbApi.csproj", "{0D4B317C-D26F-4C72-8E4A-3F69AEF26D7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaraDbApi", "../GaraDbApi/GaraDbApi.csproj", "{0D4B317C-D26F-4C72-8E4A-3F69AEF26D7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

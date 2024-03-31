@@ -30,15 +30,15 @@ namespace Gara.Services
         {
             if (Debugger.IsAttached)
             {
-                port = "5298";
+                port = "44450";
             }
             else
             {
-                port = "5000";
+                port = "44450";
             }
-            uri = new($"http://localhost:{port}");
+            uri = new($"https://garaapi-production.up.railway.app:{port}");
 
-
+                
             client = new HttpClient();
             jsonSerializationOptions = new JsonSerializerOptions
             {

@@ -36,7 +36,7 @@ namespace Gara.Services
             {
                 port = "5000";
             }
-            uri = new($"http://localhost:{port}");
+            uri = new($"garaapi-production.up.railway.app");
 
 
             client = new HttpClient();
